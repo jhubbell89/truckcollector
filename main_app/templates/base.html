@@ -15,11 +15,13 @@
     <nav class="green">
       <div class="nav-wrapper">
         <ul>
-          <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Truck Collector</a></li>
+          <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Truck Collector</a></li>
         </ul>
         <ul class="right">
-          <li><a href="/about">About</a></li>
-          <li><a href="/trucks">View All My Trucks</a></li>
+          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'trucks_create' %}">Add a Truck</a></li>
+          <li><a href="{% url 'index' %}">View All My Trucks</a></li>
+
         </ul>
       </div>
     </nav>

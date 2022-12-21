@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Truck(models.Model):
@@ -8,4 +9,7 @@ class Truck(models.Model):
     year = models.IntegerField()
 
     def __str__(self):
-      return self.name
+      return self.model
+
+    def get_absolute_url(self):
+      return reverse('detail', kwargs={'truck_id': self.id})
