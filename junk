@@ -1,0 +1,7 @@
+
+
+trucks = [
+  Truck('Chevrolet', 'S10', 'beater', 23),
+  Truck('Sachi', 'tortoise shell', 'diluted tortoise shell', 0),
+  Truck('Raven', 'black tripod', '3 legged cat', 4)
+]
