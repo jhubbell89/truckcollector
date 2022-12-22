@@ -3,9 +3,11 @@
 
 <h1>Truck Details</h1>
 
-<div class="card">
-  <div class="card-content">
-    <span class="card-title">{{ truck.model }}</span>
+<div class="row">
+  <div class="col s6">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">{{ truck.model }}</span>
         <p>Make: {{ truck.make }}</p>
         <p>Condition: {{ truck.condition }}</p>
         {% if truck.year < 2023 %}
@@ -13,11 +15,45 @@
         {% else %}
           <p>Year: Brand New</p>
         {% endif %}
+      </div>
+      <div class="card-action">
+        <a href="{% url 'trucks_update' truck.id %}">Edit</a>
+        <a href="{% url 'trucks_delete' truck.id %}">Delete</a>
+      </div>
+    </div>
   </div>
-  <div class="card-action">
-    <a href="{% url 'trucks_update' truck.id %}">Edit</a>
-    <a href="{% url 'trucks_delete' truck.id %}">Delete</a>
+  <div class="col s6">
+    <form action="{% url 'add_service' truck.id %}" method="POST">
+      {% csrf_token %}
+      {{ service_form.as_p }}
+      <input type="submit" class="btn" value="Add service">
+    </form>
+    <table class="striped">
+      <thead>
+        <tr><th>Date</th><th>Checks</th></tr>
+      </thead>
+      <tbody>
+        {% for service in truck.service_set.all %}
+          <tr>
+            <td>{{service.date}}</td>
+            <td>{{service.get_weeklychecks_display}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 </div>
+
+<script>
+  const dateEl = document.getElementById('id_date');
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  });
+  const selectEl = document.getElementById('id_weeklychecks');
+  M.FormSelect.init(selectEl);
+</script>
 
 {% endblock %}

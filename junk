@@ -5,3 +5,21 @@ trucks = [
   Truck('Sachi', 'tortoise shell', 'diluted tortoise shell', 0),
   Truck('Raven', 'black tripod', '3 legged cat', 4)
 ]
+
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ truck.model }}</span>
+        <p>Make: {{ truck.make }}</p>
+        <p>Condition: {{ truck.condition }}</p>
+        {% if truck.year < 2023 %}
+          <p>Year: {{ truck.year }}</p>
+        {% else %}
+          <p>Year: Brand New</p>
+        {% endif %}
+  </div>
+  <div class="card-action">
+    <a href="{% url 'trucks_update' truck.id %}">Edit</a>
+    <a href="{% url 'trucks_delete' truck.id %}">Delete</a>
+  </div>
+</div>

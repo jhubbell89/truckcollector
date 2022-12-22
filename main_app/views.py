@@ -1,7 +1,7 @@
-from django.shortcuts import render
-from .models import Truck
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Truck
+from .forms import ServiceForm
 
 # Create your views here.
 def home(request):
@@ -16,7 +16,16 @@ def trucks_index(request):
 
 def trucks_detail(request, truck_id):
   truck = Truck.objects.get(id=truck_id)
-  return render(request, 'trucks/detail.html', { 'truck': truck })
+  service_form = ServiceForm()
+  return render(request, 'trucks/detail.html', { 'truck': truck, 'service_form': service_form })
+
+def add_service(request, truck_id):
+  form = ServiceForm(request.POST)
+  if form.is_valid():
+    new_service = form.save(commit=False)
+    new_service.truck_id = truck_id
+    new_service.save()
+  return redirect('detail', truck_id=truck_id)
 
 class TruckCreate(CreateView):
   model = Truck
