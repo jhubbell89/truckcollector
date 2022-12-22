@@ -17,8 +17,14 @@ def trucks_index(request):
 
 def trucks_detail(request, truck_id):
   truck = Truck.objects.get(id=truck_id)
+  id_list = truck.mods.all().values_list('id')
+  mods_truck_doesnt_have = Mod.objects.exclude(id__in=id_list)
   service_form = ServiceForm()
-  return render(request, 'trucks/detail.html', { 'truck': truck, 'service_form': service_form })
+  return render(request, 'trucks/detail.html', { 
+    'truck': truck, 
+    'service_form': service_form, 
+    'mods': mods_truck_doesnt_have 
+    })
 
 def add_service(request, truck_id):
   form = ServiceForm(request.POST)
@@ -30,7 +36,7 @@ def add_service(request, truck_id):
 
 class TruckCreate(CreateView):
   model = Truck
-  fields = '__all__'
+  fields = ['make', 'model', 'condition', 'year']
 
 class TruckUpdate(UpdateView):
   model = Truck
@@ -52,8 +58,12 @@ class ModCreate(CreateView):
 
 class ModUpdate(UpdateView):
   model = Mod
-  fields = ['name', 'age']
+  fields = ['name', 'skill']
 
 class ModDelete(DeleteView):
   model = Mod
   success_url = '/mods/'
+
+def assoc_mod(request, truck_id, mod_id):
+  Truck.objects.get(id=truck_id).mods.add(mod_id)
+  return redirect('detail', truck_id=truck_id)

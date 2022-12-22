@@ -11,7 +11,7 @@ WEEKLYCHECK = (
 
 class Mod(models.Model):
     name = models.CharField(max_length=100)
-    age = models.IntegerField()
+    skill = models.PositiveIntegerField('Difficulty to Install')
 
     def __str__(self):
       return self.name
@@ -25,6 +25,7 @@ class Truck(models.Model):
     model = models.CharField(max_length=100)
     condition = models.TextField(max_length=250)
     year = models.IntegerField()
+    mods = models.ManyToManyField(Mod)
 
     def __str__(self):
       return self.model

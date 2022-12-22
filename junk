@@ -23,3 +23,6 @@ trucks = [
     <a href="{% url 'trucks_delete' truck.id %}">Delete</a>
   </div>
 </div>
+
+
+<span style="color: {{ mod.color }}">{{ mod.color }}</span>
