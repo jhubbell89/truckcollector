@@ -28,6 +28,12 @@
       {{ service_form.as_p }}
       <input type="submit" class="btn" value="Add service">
     </form>
+    <br>
+    {% if truck.fed_for_today %}
+      <div class="card-panel teal-text center-align">{{truck.model}} has been checked for today</div>
+    {% else %}
+      <div class="card-panel red-text center-align">{{truck.model}} might need some things checked</div>
+    {% endif %}
     <table class="striped">
       <thead>
         <tr><th>Date</th><th>Checks</th></tr>

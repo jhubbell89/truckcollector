@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from datetime import date
 
 WEEKLYCHECK = (
   ('T', 'Tire Pressure'),
@@ -20,6 +21,9 @@ class Truck(models.Model):
 
     def get_absolute_url(self):
       return reverse('detail', kwargs={'truck_id': self.id})
+
+    def fed_for_today(self):
+      return self.service_set.filter(date=date.today()).count() >= len(WEEKLYCHECK)
 
 class Service(models.Model):
     date = models.DateField('Service Date')
