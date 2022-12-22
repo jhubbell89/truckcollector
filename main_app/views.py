@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Truck
+from django.views.generic import ListView, DetailView
+from .models import Truck, Mod
 from .forms import ServiceForm
 
 # Create your views here.
@@ -38,3 +39,21 @@ class TruckUpdate(UpdateView):
 class TruckDelete(DeleteView):
   model = Truck
   success_url = '/trucks/'
+
+class ModList(ListView):
+  model = Mod
+
+class ModDetail(DetailView):
+  model = Mod
+
+class ModCreate(CreateView):
+  model = Mod
+  fields = '__all__'
+
+class ModUpdate(UpdateView):
+  model = Mod
+  fields = ['name', 'age']
+
+class ModDelete(DeleteView):
+  model = Mod
+  success_url = '/mods/'

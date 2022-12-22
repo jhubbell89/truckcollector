@@ -10,5 +10,9 @@ urlpatterns = [
     path('trucks/<int:pk>/update/', views.TruckUpdate.as_view(), name='trucks_update'),
     path('trucks/<int:pk>/delete/', views.TruckDelete.as_view(), name='trucks_delete'),  
     path('trucks/<int:truck_id>/add_service/', views.add_service, name='add_service'),
-
+    path('mods/', views.ModList.as_view(), name='mods_index'),
+    path('mods/<int:pk>/', views.ModDetail.as_view(), name='mods_detail'),
+    path('mods/create/', views.ModCreate.as_view(), name='mods_create'),
+    path('mods/<int:pk>/update/', views.ModUpdate.as_view(), name='mods_update'),
+    path('mods/<int:pk>/delete/', views.ModDelete.as_view(), name='mods_delete'),
 ]

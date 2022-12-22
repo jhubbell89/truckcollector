@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  ...
 </head>
 <body>
   <header class="navbar-fixed red">
@@ -23,7 +22,8 @@
           <li><a href="{% url 'about' %}">About</a></li>
           <li><a href="{% url 'trucks_create' %}">Add a Truck</a></li>
           <li><a href="{% url 'index' %}">View All My Trucks</a></li>
-
+          <li><a href="{% url 'mods_create' %}">Add Mods</a></li>
+          <li><a href="{% url 'mods_index' %}">View All My Mods</a></li>
         </ul>
       </div>
     </nav>
